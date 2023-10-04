@@ -27,21 +27,21 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>Thomson Reuters</td>
-            <td>Cibelly Neuza Silva e Souza</td>
-            <td>03938710292</td>
-            <td>15-07-2002</td>
-            <td>Estagiário</td>
-            <td>Ativo</td>
-            <td>1440,00</td>
-            <td>Estagiário</td>
-            <td>netunew@gmail.com</td>
+          <tr *ngFor="let employee of empList">
+            <td>{{employee.id}}</td>
+            <td>{{employee.client_id}}</td>
+            <td>{{employee.name}}</td>
+            <td>{{employee.national_identity}}</td>
+            <td>{{employee.birthdate}}</td>
+            <td>{{employee.job_position}}</td>
+            <td>{{employee.activity}}</td>
+            <td>{{employee.salary}}</td>
+            <td>{{employee.type}}</td>
+            <td>{{employee.email}}</td>
           </tr>
           <tr>
-            <button type="button" class="btn btn-primary" >Editar</button>
-            <button type="button" class="btn btn-danger" >Delete</button>
+            <button type="button" class="btn btn-outline-primary me-2" data-bs-toggle="modal" data-bs-target="#editEmployee" (click="editEmployee()")>Editar</button>
+            <button type="button" class="btn btn-outline-danger" >Delete</button>
           </tr>
 
 
@@ -49,8 +49,8 @@
         </tbody>
       </table>
 
-      <!--MODAL PARA ADICIONAR FUNCIONÁRIO-->
-      <div class="modal" id="addEmployee" tabindex="-1">
+<!--MODAL PARA ADICIONAR FUNCIONÁRIO-->
+    <div class="modal" id="addEmployee" tabindex="-1">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
@@ -105,8 +105,64 @@
 
           </div>
         </div>
-      </div>
+    </div>
       
+<!--MODAL PARA BUTTON TRIGGER-->
+  <div class="modal fade" id="editEmployee" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Editar funcionário</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form [formGroup]="empDetail">
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Empresa</label>
+                    <input type="text" formControlName="client" class="form-control" id="email" aria-describedby="Empresa">
+                </div>
+                <div class="mb-3">
+                  <label for="exampleInputEmail1" class="form-label">Nome</label>
+                  <input type="text" formControlName="name" class="form-control" id="email" aria-describedby="Nome">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">CPF</label>
+                    <input type="number" formControlName="cpf" class="form-control" id="email" aria-describedby="CPF">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Data de Nascimento</label>
+                    <input type="date" formControlName="birthdate" class="form-control" id="email" aria-describedby="Data de nascimento">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Cargo</label>
+                    <input type="text" formControlName="job_position" class="form-control" id="email" aria-describedby="Cargo">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Atividade</label>
+                    <input type="text" formControlName="activity" class="form-control" id="email" aria-describedby="Atividade">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Salário</label>
+                    <input type="number" formControlName="salary" class="form-control" id="email" aria-describedby="Salario">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Tipo</label>
+                    <input type="text" formControlName="type" class="form-control" id="email" aria-describedby="Tipo">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Email</label>
+                    <input type="email" formControlName="email" class="form-control" id="email" aria-describedby="emailHelp">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-outline-success" (click)="addEmployee()">Salvar</button>
+                </div>
+
+              </form>
+        </div>
+      </div>
+    </div>
+  </div>
 
 
 </div>
