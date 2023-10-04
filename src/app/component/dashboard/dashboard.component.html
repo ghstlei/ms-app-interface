@@ -1,0 +1,112 @@
+<div class="container-fluid">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">MS Application</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <button class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#addEmployee" type="submit">Funcionário</button>
+          </div>
+        </div>
+      </nav>
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Empresa</th>
+            <th scope="col">Nome</th>
+            <th scope="col">CPF</th>
+            <th scope="col">Data de Nascimento</th>
+            <th scope="col">Cargo</th>
+            <th scope="col">Atividade</th>
+            <th scope="col">Salário</th>
+            <th scope="col">Tipo</th>
+            <th scope="col">Email</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td>Thomson Reuters</td>
+            <td>Cibelly Neuza Silva e Souza</td>
+            <td>03938710292</td>
+            <td>15-07-2002</td>
+            <td>Estagiário</td>
+            <td>Ativo</td>
+            <td>1440,00</td>
+            <td>Estagiário</td>
+            <td>netunew@gmail.com</td>
+          </tr>
+          <tr>
+            <button type="button" class="btn btn-primary" >Editar</button>
+            <button type="button" class="btn btn-danger" >Delete</button>
+          </tr>
+
+
+
+        </tbody>
+      </table>
+
+      <!--MODAL PARA ADICIONAR FUNCIONÁRIO-->
+      <div class="modal" id="addEmployee" tabindex="-1">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Adicionar Funcionário</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="empDetail">
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Empresa</label>
+                        <input type="text" formControlName="client" class="form-control" id="email" aria-describedby="Empresa">
+                    </div>
+                    <div class="mb-3">
+                      <label for="exampleInputEmail1" class="form-label">Nome</label>
+                      <input type="text" formControlName="name" class="form-control" id="email" aria-describedby="Nome">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">CPF</label>
+                        <input type="number" formControlName="cpf" class="form-control" id="email" aria-describedby="CPF">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Data de Nascimento</label>
+                        <input type="date" formControlName="birthdate" class="form-control" id="email" aria-describedby="Data de nascimento">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Cargo</label>
+                        <input type="text" formControlName="job_position" class="form-control" id="email" aria-describedby="Cargo">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Atividade</label>
+                        <input type="text" formControlName="activity" class="form-control" id="email" aria-describedby="Atividade">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Salário</label>
+                        <input type="number" formControlName="salary" class="form-control" id="email" aria-describedby="Salario">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Tipo</label>
+                        <input type="text" formControlName="type" class="form-control" id="email" aria-describedby="Tipo">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Email</label>
+                        <input type="email" formControlName="email" class="form-control" id="email" aria-describedby="emailHelp">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-primary" (click)="addEmployee()">Adicionar</button>
+                    </div>
+
+                  </form>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      
+
+
+</div>
