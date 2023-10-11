@@ -1,15 +1,14 @@
-:host{
-    display:flex;
-    flex-direction: column;
-    height: 100%;
-
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
-mat-drawer{
-    width: 260px;
-    background-color: #0f172a;
+mat-drawer {
+  width: 260px;
+  background: #ffffff;
+}
+mat-drawer-container {
+  height: 100%;
 }
 
-mat-drawer-container{
-    height: 100%;
-}

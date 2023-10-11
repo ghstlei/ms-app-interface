@@ -1,1 +1,73 @@
+<div class="container-fluid">
+
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+      <a class="navbar-brand">Afastamento de Empregado</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <button class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#addClient" type="submit">Adicionar</button>
+      </div>
+    </div>
+  </nav>
+
+<!-- Modal -->
+<div class="modal fade" id="addClient" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Novo afastamento de empregado</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        
+        <form>
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Empresa</label>
+            <input type="text" formControlName="client" class="form-control" id="client" aria-describedby="Empresa">
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Nome do Funcionário</label>
+            <input type="text" formControlName="name" class="form-control" id="name" aria-describedby="Nome">
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Motivo do afastamento</label>
+            <input type="text" formControlName="leave-type" class="form-control" id="leave-type" aria-describedby="CPF">
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Início do afastamento</label>
+            <input type="date" formControlName="leave-date" class="form-control" id="leave-date"
+              aria-describedby="Data de nascimento">
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Dias de afastamento</label>
+            <input type="number" formControlName="leave-days" class="form-control" id="leave-days"
+              aria-describedby="Cargo">
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Data de Retorno</label>
+            <input type="date" formControlName="return-date" class="form-control" id="return-date"
+              aria-describedby="Retorno">
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Tipo</label>
+            <input type="text" formControlName="type" class="form-control" id="type" aria-describedby="Tipo">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <button type="button" class="btn btn-primary">Salvar</button>
+          </div>
+          
+        </form>
+
+
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
 
