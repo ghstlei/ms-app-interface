@@ -7,13 +7,47 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
-        <button class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#addClient" type="submit">Adicionar</button>
+        <button class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#addLeave" type="submit">Adicionar</button>
       </div>
     </div>
   </nav>
 
-<!-- Modal -->
-<div class="modal fade" id="addClient" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Empresa</th>
+        <th scope="col">Funcionário</th>
+        <th scope="col">Afastamento</th>
+        <th scope="col">Inicio</th>
+        <th scope="col">Dias</th>
+        <th scope="col">Retorno</th>
+        <th scope="col">Tipo</th>
+        <th scope="col">Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let leave of empList">
+        <td>{{leave.id}}</td>
+        <td>{{leave.client_id}}</td>
+        <td>{{leave.employee_id}}</td>
+        <td>{{leave.leave_type}}</td>
+        <td>{{leave.leave_date}}</td>
+        <td>{{leave.number_days}}</td>
+        <td>{{leave.return_date}}</td>
+        <td>{{leave.type}}</td>
+        <td>
+          <button type="button" class="btn btn-outline-primary me-2" data-bs-toggle="modal" data-bs-target="#editLeave"
+            (click)="editLeave()">Editar</button>
+          <button type="button" class="btn btn-outline-danger" (click)="deleteLeaveById(leave)">Deletar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+<!-- ADD LEAVE -->
+<div class="modal fade" id="addLeave" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -25,15 +59,30 @@
         <form>
           <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Empresa</label>
-            <input type="text" formControlName="client" class="form-control" id="client" aria-describedby="Empresa">
+            <select class="form-select" aria-label="type" id="type">
+              <option selected>Selecionar</option>
+              <option value="1">Empresa</option>
+            </select>
           </div>
           <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Nome do Funcionário</label>
-            <input type="text" formControlName="name" class="form-control" id="name" aria-describedby="Nome">
+            <select class="form-select" aria-label="type" id="type">
+              <option selected>Selecionar</option>
+              <option value="1">Funcionário</option> 
+            </select>
           </div>
           <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Motivo do afastamento</label>
-            <input type="text" formControlName="leave-type" class="form-control" id="leave-type" aria-describedby="CPF">
+            <select class="form-select" aria-label="type" id="type">
+              <option selected>Selecionar</option>
+              <option value="contributors_death">Morte</option>
+              <option value="maternity_leave">Licença maternidade</option>
+              <option value="paternit_leave">Licença paternidade</option>
+              <option value="work_injury">Acidente de trabalho</option>
+              <option value="vacation">Férias</option>
+              <option value="termination">Rescisão</option>
+              <option value="others">Outros</option>
+            </select>
           </div>
           <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Início do afastamento</label>
@@ -42,8 +91,11 @@
           </div>
           <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Dias de afastamento</label>
-            <input type="number" formControlName="leave-days" class="form-control" id="leave-days"
-              aria-describedby="Cargo">
+            <input type="number"
+            appformControlName="number_days"
+            class="form-control"
+            id="number_days"
+            [disabled]="!enable_leave_days()">
           </div>
           <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Data de Retorno</label>
@@ -52,7 +104,12 @@
           </div>
           <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Tipo</label>
-            <input type="text" formControlName="type" class="form-control" id="type" aria-describedby="Tipo">
+            <select class="form-select" aria-label="type" id="type">
+              <option selected>Selecionar</option>
+              <option value="Typical">Típico</option>
+              <option value="Professional disease or from work">Doença profissional</option>
+              <option value="Commuting accident">Trajeto</option>
+            </select> 
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
@@ -68,6 +125,89 @@
   </div>
 </div>
 
+
+
+  <!-- EDIT CLIENT -->
+  <div class="modal fade" id="editLeave" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Editar cliente</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="empDetail">
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">ID</label>
+              <input type="number" formControlName="id" class="form-control" id="id"
+                aria-describedby="emailHelp">
+            </div>  <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Empresa</label>
+              <select class="form-select" aria-label="type" id="type">
+                <option selected>Selecionar</option>
+                <option value="1">Empresa</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Nome do Funcionário</label>
+              <select class="form-select" aria-label="type" id="type">
+                <option selected>Selecionar</option>
+                <option value="1">Funcionário</option> 
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Motivo do afastamento</label>
+              <select class="form-select" aria-label="type" id="type">
+                <option selected>Selecionar</option>
+                <option value="contributors_death">Morte</option>
+                <option value="maternity_leave">Licença maternidade</option>
+                <option value="paternit_leave">Licença paternidade</option>
+                <option value="work_injury">Acidente de trabalho</option>
+                <option value="vacation">Férias</option>
+                <option value="termination">Rescisão</option>
+                <option value="others">Outros</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Início do afastamento</label>
+              <input type="date" formControlName="leave-date" class="form-control" id="leave-date"
+                aria-describedby="Data de nascimento">
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Dias de afastamento</label>
+              <input type="number"
+              appformControlName="number_days"
+              class="form-control"
+              id="number_days"
+              [disabled]="!enable_leave_days()">
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Data de Retorno</label>
+              <input type="date" formControlName="return-date" class="form-control" id="return-date"
+                aria-describedby="Retorno">
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Tipo</label>
+              <select class="form-select" aria-label="type" id="type">
+                <option selected>Selecionar</option>
+                <option value="Typical">Típico</option>
+                <option value="Professional disease or from work">Doença profissional</option>
+                <option value="Commuting accident">Trajeto</option>
+              </select> 
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+              <button type="button" class="btn btn-primary">Salvar</button>
+            </div>  
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+              <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="updateLeave()">Atualizar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 

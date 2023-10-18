@@ -7,13 +7,48 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
-        <button class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#addClient" type="submit">Adicionar</button>
+        <button class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#addEmployee" type="submit">Adicionar</button>
       </div>
     </div>
   </nav>
 
-<!-- Modal -->
-<div class="modal fade" id="addClient" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Empresa</th>
+        <th scope="col">Nome</th>
+        <th scope="col">CPF</th>
+        <th scope="col">Nascimento</th>
+        <th scope="col">Cargo</th>
+        <th scope="col">Atividade</th>
+        <th scope="col">Salário</th>
+        <th scope="col">Tipo</th>
+        <th scope="col">Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let employee of empList">
+        <td>{{employee.id}}</td>
+        <td>{{employee.client_id}}</td>
+        <td>{{employee.name}}</td>
+        <td>{{employee.national_identity}}</td>
+        <td>{{employee.birthdate}}</td>
+        <td>{{employee.job_position}}</td>
+        <td>{{employee.activity}}</td>
+        <td>{{employee.salary}}</td>
+        <td>{{employee.type}}</td>
+        <td>
+          <button type="button" class="btn btn-outline-primary me-2" data-bs-toggle="modal" data-bs-target="#editEmployee"
+            (click)="editEmployee()">Editar</button>
+          <button type="button" class="btn btn-outline-danger" (click)="deleteEmployee(employee)">Deletar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+<!-- ADD EMPLOYEE -->
+<div class="modal fade" id="addEmployee" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -22,10 +57,14 @@
       </div>
       <div class="modal-body">
         
-        <form [formGroup]="empDetail">
+        <form>
           <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">Empresa</label>
-            <input type="text" formControlName="client" class="form-control" id="email" aria-describedby="Empresa">
+            <label for="getClient" class="form-label">Empresa</label>
+            <select class="form-select" id="clientSelect" name="selectClient">
+              <option selected>Selecionar</option>
+              <option value="1">Empresa</option>
+              <option value="2">Empresa</option>
+            </select>
           </div>
           <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Nome</label>
@@ -42,13 +81,19 @@
           </div>
           <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Cargo</label>
-            <input type="text" formControlName="job_position" class="form-control" id="email"
-              aria-describedby="Cargo">
+            <select class="form-select" aria-label="job-position" id="job-position">
+              <option selected>Selecionar</option>
+              <option value="1"></option>
+              <option value="2"></option>
+            </select>
           </div>
           <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Atividade</label>
-            <input type="text" formControlName="activity" class="form-control" id="email"
-              aria-describedby="Atividade">
+            <select class="form-select" aria-label="activity" id="activity">
+              <option selected>Selecionar</option>
+              <option value="1">Ativo</option>
+              <option value="2">Inativo</option>
+            </select>
           </div>
           <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Salário</label>
@@ -56,7 +101,12 @@
           </div>
           <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Tipo</label>
-            <input type="text" formControlName="type" class="form-control" id="email" aria-describedby="Tipo">
+            <select class="form-select" aria-label="type" id="type">
+              <option selected>Selecionar</option>
+              <option value="1">Empregado</option>
+              <option value="2">Contribuintes</option>
+              <option value="3">Estagiário</option>
+            </select>
           </div>
           <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Email</label>
@@ -76,5 +126,87 @@
   </div>
 </div>
 
-</div>
 
+  <!-- EDIT EMPLOYEE -->
+  <div class="modal fade" id="editEmployee" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Editar cliente</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="empDetail">
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">ID</label>
+              <input type="number" formControlName="id" class="form-control" id="id"
+                aria-describedby="emailHelp">
+            </div><div class="mb-3">
+              <label for="getClient" class="form-label">Empresa</label>
+              <select class="form-select" id="clientSelect" name="selectClient">
+                <option selected>Selecionar</option>
+                <option value="1">Empresa</option>
+                <option value="2">Empresa</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Nome</label>
+              <input type="text" formControlName="name" class="form-control" id="email" aria-describedby="Nome">
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">CPF</label>
+              <input type="number" formControlName="cpf" class="form-control" id="email" aria-describedby="CPF">
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Data de Nascimento</label>
+              <input type="date" formControlName="birthdate" class="form-control" id="email"
+                aria-describedby="Data de nascimento">
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Cargo</label>
+              <select class="form-select" aria-label="job-position" id="job-position">
+                <option selected>Selecionar</option>
+                <option value="1"></option>
+                <option value="2"></option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Atividade</label>
+              <select class="form-select" aria-label="activity" id="activity">
+                <option selected>Selecionar</option>
+                <option value="1">Ativo</option>
+                <option value="2">Inativo</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Salário</label>
+              <input type="number" formControlName="salary" class="form-control" id="email" aria-describedby="Salario">
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Tipo</label>
+              <select class="form-select" aria-label="type" id="type">
+                <option selected>Selecionar</option>
+                <option value="1">Empregado</option>
+                <option value="2">Contribuintes</option>
+                <option value="3">Estagiário</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Email</label>
+              <input type="email" formControlName="email" class="form-control" id="email" aria-describedby="emailHelp">
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+              <button type="button" class="btn btn-primary">Salvar</button>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+              <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="updateEmployee()">Atualizar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
