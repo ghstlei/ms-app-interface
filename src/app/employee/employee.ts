@@ -8,5 +8,4 @@ export class Employee {
     activity : string='';
     salary : number=0;
     type : string='';
-    email : string='';
 }

@@ -60,10 +60,9 @@
         <form>
           <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Empresa</label>
-            <<select class="form-select" aria-label="client" id="client">
+            <select [(ngModel)]="client" class="form-select" id="client" name="client">
               <option selected>Selecionar</option>
-              <option value="1"></option>
-              <option value="2"></option>
+              <option *ngFor="let client of client" [ngValue]="client">{{client.name}}</option>
             </select>
           </div>
           <div class="mb-3">
@@ -107,20 +106,12 @@
               <option value="3">Estagiário</option>
             </select>
           </div>
-          <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">Email</label>
-            <input type="email" formControlName="email" class="form-control" id="email" aria-describedby="emailHelp">
-          </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-            <button type="button" class="btn btn-primary">Salvar</button>
-          </div>
-          
+            <button type="button" class="btn btn-primary" (click)="addEmployee()">Salvar</button>
+          </div>         
         </form>
-
-
-      </div>
-      
+      </div>   
     </div>
   </div>
 </div>
@@ -189,10 +180,6 @@
                 <option value="2">Contribuintes</option>
                 <option value="3">Estagiário</option>
               </select>
-            </div>
-            <div class="mb-3">
-              <label for="exampleInputEmail1" class="form-label">Email</label>
-              <input type="email" formControlName="email" class="form-control" id="email" aria-describedby="emailHelp">
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>

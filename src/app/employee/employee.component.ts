@@ -4,6 +4,8 @@ import { Employee } from './employee';
 import { EmployeeService } from './employee.service';
 import { JobService } from '../job-position/job-position.service';
 import { JobPosition } from '../job-position/job-position';
+import { ClientService } from '../client/client.service';
+import { Client } from '../client/client';
 
 @Component({
   selector: 'app-employee',
@@ -16,9 +18,9 @@ export class EmployeeComponent implements OnInit {
   empObj : Employee = new Employee();
   empList : Employee[] = [];
   job_position : JobPosition[] = [];
+  client : Client[] = [];
 
-
-  constructor(private formBuider : FormBuilder, private empService : EmployeeService, private jobService : JobService){
+  constructor(private formBuider : FormBuilder, private empService : EmployeeService, private jobService : JobService,  private clientService : ClientService){
   }
 
   
@@ -34,7 +36,7 @@ export class EmployeeComponent implements OnInit {
       name : [''],
       national_identity : [''],
       birthdate : [''],
-      job_position : null,
+      job_position : [''],
       activity : [''],
       salary : [''],
       type : [''],
@@ -47,6 +49,11 @@ export class EmployeeComponent implements OnInit {
       this.job_position = job_position;
     });
 
+// GET CLIENT PARA O CAMPO SELECT
+
+    this.clientService.getAllClient().subscribe(client => {
+      this.client = client;
+    });
 
   }
 

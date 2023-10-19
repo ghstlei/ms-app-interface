@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms'
 import { EmployeeLeave } from './employee-leave';
 import { EmployeeLeaveService } from './employee-leave.service';
+import { ClientService } from '../client/client.service';
+import { Client } from '../client/client';
+import { EmployeeService } from '../employee/employee.service';
+import { Employee } from '../employee/employee';
 
 @Component({
   selector: 'app-employee-leave',
@@ -13,6 +17,8 @@ export class EmployeeLeaveComponent implements OnInit {
   empDetail !: FormGroup;
   empObj: EmployeeLeave = new EmployeeLeave();
   empList: EmployeeLeave[] = [];
+  employee : Employee[] = [];
+  client : Client[] = [];
 
   // validação motivo do afastamento & dias de afastamento
   leave_type: string;
@@ -26,7 +32,7 @@ export class EmployeeLeaveComponent implements OnInit {
     );
   }
 
-  constructor(private formBuider: FormBuilder, private empService: EmployeeLeaveService) {
+  constructor(private formBuider: FormBuilder, private leaveService: EmployeeLeaveService, private empService : EmployeeService,  private clientService : ClientService) {
   }
 
 
@@ -46,6 +52,17 @@ export class EmployeeLeaveComponent implements OnInit {
       type: [''],
     });
 
+    // GET FUNCIONARIOS PARA O CAMPO SELECT
+
+    this.empService.getAllEmployee().subscribe(employee => {
+      this.employee = employee;
+    });
+
+// GET CLIENT PARA O CAMPO SELECT
+
+    this.clientService.getAllClient().subscribe(client => {
+      this.client = client;
+    });
 
   }
 
@@ -61,7 +78,7 @@ export class EmployeeLeaveComponent implements OnInit {
     this.empObj.return_date = this.empDetail.value.return_date;
     this.empObj.type = this.empDetail.value.type;
 
-    this.empService.addLeave(this.empObj).subscribe(res => {
+    this.leaveService.addLeave(this.empObj).subscribe(res => {
       console.log(res);
       this.getAllLeave();
     }, err => {
@@ -92,7 +109,7 @@ export class EmployeeLeaveComponent implements OnInit {
     this.empObj.type = this.empDetail.value.type;
 
 
-    this.empService.updateLeave(this.empObj).subscribe(res => {
+    this.leaveService.updateLeave(this.empObj).subscribe(res => {
       console.log(res);
       this.getAllLeave();
     }, err => {
@@ -103,7 +120,7 @@ export class EmployeeLeaveComponent implements OnInit {
 
   getAllLeave() {
 
-    this.empService.getAllLeave().subscribe(res => {
+    this.leaveService.getAllLeave().subscribe(res => {
       this.empList = res;
     }, err => {
       console.log("error while fetching data.")
@@ -112,7 +129,7 @@ export class EmployeeLeaveComponent implements OnInit {
   }
 
   deleteLeaveById(emp: EmployeeLeave) {
-    this.empService.deleteLeaveById(emp).subscribe(res => {
+    this.leaveService.deleteLeaveById(emp).subscribe(res => {
       console.log(res);
       alert('Employee deleted successfull');
       this.getAllLeave;

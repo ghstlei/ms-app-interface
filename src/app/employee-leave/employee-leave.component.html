@@ -59,16 +59,16 @@
         <form>
           <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Empresa</label>
-            <select class="form-select" aria-label="type" id="type">
+            <select [(ngModel)]="client" class="form-select" id="client" name="client">
               <option selected>Selecionar</option>
-              <option value="1">Empresa</option>
+              <option *ngFor="let client of client" [ngValue]="client">{{client.name}}</option>
             </select>
           </div>
           <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Nome do Funcionário</label>
-            <select class="form-select" aria-label="type" id="type">
+            <select [(ngModel)]="employee" class="form-select" id="client" name="client">
               <option selected>Selecionar</option>
-              <option value="1">Funcionário</option> 
+              <option *ngFor="let employee of employee" [ngValue]="employee">{{employee.name}}</option>
             </select>
           </div>
           <div class="mb-3">

@@ -15,10 +15,10 @@ export class EmployeeLeaveService{
 
     constructor(private http : HttpClient){ 
 
-        this.addEmpURL = 'http://localhost:5500/leave/addLeave';
-        this.getEmpURL = 'http://localhost:5500/leave/getAllLeave';
-        this.updateEmpURL = 'http://localhost:5500/leave/updateLeave';
-        this.deleteEmpURL = 'http://localhost:5500/leave/deleteLeaveById';
+        this.addEmpURL = 'http://localhost:5456/leave/addLeave';
+        this.getEmpURL = 'http://localhost:5456/leave/getAllLeave';
+        this.updateEmpURL = 'http://localhost:5456/leave/updateLeave';
+        this.deleteEmpURL = 'http://localhost:5456/leave/deleteLeaveById';
 
     }
 
