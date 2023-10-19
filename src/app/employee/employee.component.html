@@ -52,18 +52,18 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Cadastrar Empresa</h1>
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Cadastrar funcionário</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         
         <form>
           <div class="mb-3">
-            <label for="getClient" class="form-label">Empresa</label>
-            <select class="form-select" id="clientSelect" name="selectClient">
+            <label for="exampleInputEmail1" class="form-label">Empresa</label>
+            <<select class="form-select" aria-label="client" id="client">
               <option selected>Selecionar</option>
-              <option value="1">Empresa</option>
-              <option value="2">Empresa</option>
+              <option value="1"></option>
+              <option value="2"></option>
             </select>
           </div>
           <div class="mb-3">
@@ -81,10 +81,9 @@
           </div>
           <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Cargo</label>
-            <select class="form-select" aria-label="job-position" id="job-position">
+            <select [(ngModel)]="job_position" class="form-select" id="job_position" name="job_position">
               <option selected>Selecionar</option>
-              <option value="1"></option>
-              <option value="2"></option>
+              <option *ngFor="let job_position of job_position" [ngValue]="job_position">{{job_position.name}}</option>
             </select>
           </div>
           <div class="mb-3">

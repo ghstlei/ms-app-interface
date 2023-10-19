@@ -15,10 +15,10 @@ export class ClientService{
 
     constructor(private http : HttpClient){ 
 
-        this.addCltURL = 'http://localhost:5500/clt/addClient';
-        this.getCltURL = 'http://localhost:5500/clt/getAllClient';
-        this.updateCltURL = 'http://localhost:5500/clt/updateClient';
-        this.deleteCltURL = 'http://localhost:5500/clt/deleteClientById';
+        this.addCltURL = 'http://localhost:5452/clt/addClient';
+        this.getCltURL = 'http://localhost:5452/clt/getAllClient';
+        this.updateCltURL = 'http://localhost:5452/clt/updateClient';
+        this.deleteCltURL = 'http://localhost:5452/clt/deleteClientById';
 
     }
 

@@ -4,8 +4,9 @@ export class Employee {
     name : string='';
     national_identity : number=0;
     birthdate : string = "yyyy-MM-dd";
-    job_position : string='';
+    job_position : null;
     activity : string='';
     salary : number=0;
     type : string='';
-    email : string='';}
+    email : string='';
+}

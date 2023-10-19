@@ -15,10 +15,10 @@ export class JobService{
 
     constructor(private http : HttpClient){ 
 
-        this.addJobURL = 'http://localhost:5500/job/addJobPosition';
-        this.getJobURL = 'http://localhost:5500/job/getAllJob';
-        this.updateJobURL = 'http://localhost:5500/job/updateJob';
-        this.deleteJobURL = 'http://localhost:5500/job/deleteJobById';
+        this.addJobURL = 'http://localhost:5433/job/addJobPosition';
+        this.getJobURL = 'http://localhost:5433/job/getAllJob';
+        this.updateJobURL = 'http://localhost:5433/job/updateJob';
+        this.deleteJobURL = 'http://localhost:5433/job/deleteJobById';
 
     }
 

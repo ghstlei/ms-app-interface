@@ -19,7 +19,6 @@ export class EmployeeService{
         this.getEmpURL = 'http://localhost:5500/emp/getAllEmployee';
         this.updateEmpURL = 'http://localhost:5500/emp/updateEmployee';
         this.deleteEmpURL = 'http://localhost:5500/emp/deleteEmployeeById';
-
     }
 
 
@@ -30,6 +29,7 @@ export class EmployeeService{
     getAllEmployee(): Observable<Employee[]>{
         return this.http.get<Employee[]>(this.getEmpURL);
     }
+
 
     updateEmployee(emp : Employee) : Observable<Employee>{
     return this.http.put<Employee>(this.updateEmpURL, emp);

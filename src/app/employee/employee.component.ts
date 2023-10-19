@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms'
 import { Employee } from './employee';
 import { EmployeeService } from './employee.service';
+import { JobService } from '../job-position/job-position.service';
+import { JobPosition } from '../job-position/job-position';
 
 @Component({
   selector: 'app-employee',
@@ -13,8 +15,10 @@ export class EmployeeComponent implements OnInit {
   empDetail !: FormGroup;
   empObj : Employee = new Employee();
   empList : Employee[] = [];
+  job_position : JobPosition[] = [];
 
-  constructor(private formBuider : FormBuilder, private empService : EmployeeService){
+
+  constructor(private formBuider : FormBuilder, private empService : EmployeeService, private jobService : JobService){
   }
 
   
@@ -22,7 +26,7 @@ export class EmployeeComponent implements OnInit {
   ngOnInit(): void{
 
     this.getAllEmployee();
-    
+
 
     this.empDetail = this.formBuider.group({
       id : [''],
@@ -30,11 +34,17 @@ export class EmployeeComponent implements OnInit {
       name : [''],
       national_identity : [''],
       birthdate : [''],
-      job_position : [''],
+      job_position : null,
       activity : [''],
       salary : [''],
       type : [''],
       
+    });
+    
+// GET CARGOS PARA O CAMPO SELECT
+
+    this.jobService.getAllJob().subscribe(job_position => {
+      this.job_position = job_position;
     });
 
 
@@ -105,6 +115,8 @@ export class EmployeeComponent implements OnInit {
     });
 
   }
+
+  
 
   deleteEmployee(emp : Employee){
     this.empService.deleteEmployee(emp).subscribe(res=>{
