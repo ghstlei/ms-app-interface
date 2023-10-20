@@ -6,6 +6,8 @@ import { ClientService } from '../client/client.service';
 import { Client } from '../client/client';
 import { EmployeeService } from '../employee/employee.service';
 import { Employee } from '../employee/employee';
+import { LeaveType } from '../employee-leave/leave-type';
+import { Type } from '../employee-leave/type';
 
 @Component({
   selector: 'app-employee-leave',
@@ -19,18 +21,8 @@ export class EmployeeLeaveComponent implements OnInit {
   empList: EmployeeLeave[] = [];
   employee : Employee[] = [];
   client : Client[] = [];
-
-  // validação motivo do afastamento & dias de afastamento
-  leave_type: string;
-  number_days: number;
-
-  enable_leave_days(): boolean {
-    return (
-      this.leave_type === 'maternity_leave' ||
-      this.leave_type === 'paternit_leave' ||
-      this.leave_type === 'vacation'
-    );
-  }
+  leave_type : LeaveType[] = [];
+  type : Type[] = [];
 
   constructor(private formBuider: FormBuilder, private leaveService: EmployeeLeaveService, private empService : EmployeeService,  private clientService : ClientService) {
   }
@@ -62,6 +54,18 @@ export class EmployeeLeaveComponent implements OnInit {
 
     this.clientService.getAllClient().subscribe(client => {
       this.client = client;
+    });
+
+// GET LEAVE TYPE PARA O CAMPO SELECT
+
+    this.leaveService.getAllLeaveType().subscribe(leave_type => {
+      this.leave_type = leave_type;
+    });
+
+// GET LEAVE TYPE PARA O CAMPO SELECT
+
+    this.leaveService.getAllType().subscribe(type => {
+      this.type = type;
     });
 
   }

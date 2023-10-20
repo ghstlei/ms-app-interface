@@ -2,6 +2,8 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from 'rxjs';
 import { EmployeeLeave } from '../employee-leave/employee-leave';
+import { LeaveType } from '../employee-leave/leave-type';
+import { Type } from '../employee-leave/type';
 
 @Injectable({
     providedIn: 'root',
@@ -12,6 +14,8 @@ export class EmployeeLeaveService{
     getEmpURL : string;
     updateEmpURL : string;
     deleteEmpURL : string;
+    getLeaveTypeURL : string;
+    getTypeURL : string;
 
     constructor(private http : HttpClient){ 
 
@@ -19,7 +23,8 @@ export class EmployeeLeaveService{
         this.getEmpURL = 'http://localhost:5456/leave/getAllLeave';
         this.updateEmpURL = 'http://localhost:5456/leave/updateLeave';
         this.deleteEmpURL = 'http://localhost:5456/leave/deleteLeaveById';
-
+        this.getLeaveTypeURL = 'http://localhost:5456/leave/getAllLeaveType';
+        this.getTypeURL = 'http://localhost:5456/leave/getAllType';
     }
 
 
@@ -29,6 +34,14 @@ export class EmployeeLeaveService{
 
     getAllLeave(): Observable<EmployeeLeave[]>{
         return this.http.get<EmployeeLeave[]>(this.getEmpURL);
+    }
+
+    getAllType(): Observable<Type[]>{
+        return this.http.get<Type[]>(this.getTypeURL);
+    }
+
+    getAllLeaveType(): Observable<LeaveType[]>{
+        return this.http.get<LeaveType[]>(this.getLeaveTypeURL);
     }
 
     updateLeave(emp : EmployeeLeave) : Observable<EmployeeLeave>{
