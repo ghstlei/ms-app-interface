@@ -6,6 +6,8 @@ import { JobService } from '../job-position/job-position.service';
 import { JobPosition } from '../job-position/job-position';
 import { ClientService } from '../client/client.service';
 import { Client } from '../client/client';
+import { Activity } from '../employee/activity';
+import { Type } from '../employee/type';
 
 @Component({
   selector: 'app-employee',
@@ -19,6 +21,8 @@ export class EmployeeComponent implements OnInit {
   empList : Employee[] = [];
   job_position : JobPosition[] = [];
   client : Client[] = [];
+  activity : Activity[] = [];
+  type : Type[] = [];
 
   constructor(private formBuider : FormBuilder, private empService : EmployeeService, private jobService : JobService,  private clientService : ClientService){
   }
@@ -53,6 +57,18 @@ export class EmployeeComponent implements OnInit {
 
     this.clientService.getAllClient().subscribe(client => {
       this.client = client;
+    });
+
+// GET ACTIVITY PARA O CAMPO SELECT
+
+  this.empService.getAllActivity().subscribe(activity => {
+    this.activity = activity;
+    });
+
+// GET TYPE PARA O CAMPO SELECT
+
+  this.empService.getAllType().subscribe(type => {
+    this.type = type;
     });
 
   }

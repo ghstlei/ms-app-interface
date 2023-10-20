@@ -4,8 +4,8 @@ export class Employee {
     name : string='';
     national_identity : number=0;
     birthdate : string = "yyyy-MM-dd";
-    job_position : null;
-    activity : string='';
+    job_position : number=0;
+    activity : boolean=null;
     salary : number=0;
     type : string='';
 }

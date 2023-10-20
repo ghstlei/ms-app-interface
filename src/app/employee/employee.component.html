@@ -55,60 +55,56 @@
         <h1 class="modal-title fs-5" id="exampleModalLabel">Cadastrar funcionário</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
-        
-        <form>
+      <div class="modal-body">     
+        <form [formGroup]="empDetail">
           <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Empresa</label>
-            <select [(ngModel)]="client" class="form-select" id="client" name="client">
+            <select [(ngModel)]="client" class="form-select" id="client_id" name="client_id">
               <option selected>Selecionar</option>
-              <option *ngFor="let client of client" [ngValue]="client">{{client.name}}</option>
+              <option *ngFor="let client of client" [value]="client.id">{{client.name}}</option>
             </select>
           </div>
           <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Nome</label>
-            <input type="text" formControlName="name" class="form-control" id="email" aria-describedby="Nome">
+            <input type="text" formControlName="name" class="form-control" id="name" name="name" aria-describedby="name">
           </div>
           <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">CPF</label>
-            <input type="number" formControlName="cpf" class="form-control" id="email" aria-describedby="CPF">
+            <input type="number" formControlName="national_identity" class="form-control" id="national_identity" name="national_identity" aria-describedby="national_identity">
           </div>
           <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Data de Nascimento</label>
-            <input type="date" formControlName="birthdate" class="form-control" id="email"
+            <input type="date" formControlName="birthdate" class="form-control" id="birthdate" name="birthdate"
               aria-describedby="Data de nascimento">
           </div>
           <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Cargo</label>
             <select [(ngModel)]="job_position" class="form-select" id="job_position" name="job_position">
               <option selected>Selecionar</option>
-              <option *ngFor="let job_position of job_position" [ngValue]="job_position">{{job_position.name}}</option>
+              <option *ngFor="let job_position of job_position" [value]="job_position.id">{{job_position.name}}</option>
             </select>
           </div>
           <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Atividade</label>
-            <select class="form-select" aria-label="activity" id="activity">
+            <select [(ngModel)]="activity" class="form-select" id="activity" name="activity">
               <option selected>Selecionar</option>
-              <option value="1">Ativo</option>
-              <option value="2">Inativo</option>
+              <option *ngFor="let activity of activity" [value]="activity.id">{{activity.name}}</option>
             </select>
           </div>
           <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Salário</label>
-            <input type="number" formControlName="salary" class="form-control" id="email" aria-describedby="Salario">
+            <input type="number" formControlName="salary" class="form-control" id="email" name="salary" aria-describedby="salary">
           </div>
           <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Tipo</label>
-            <select class="form-select" aria-label="type" id="type">
+            <select [(ngModel)]="type" class="form-select" id="type" name="type">
               <option selected>Selecionar</option>
-              <option value="1">Empregado</option>
-              <option value="2">Contribuintes</option>
-              <option value="3">Estagiário</option>
+              <option *ngFor="let type of type" [value]="type.id">{{type.name}}</option>
             </select>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-            <button type="button" class="btn btn-primary" (click)="addEmployee()">Salvar</button>
+            <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="addEmployee()">Salvar</button>
           </div>         
         </form>
       </div>   

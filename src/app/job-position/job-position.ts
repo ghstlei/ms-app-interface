@@ -1,5 +1,5 @@
 export class JobPosition {
-    id : number=null;
+    id : number=0;
     name : string='';
 
 }
