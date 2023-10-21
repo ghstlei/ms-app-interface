@@ -27,7 +27,7 @@
         <td>{{client.name}}</td>
         <td>
           <button type="button" class="btn btn-outline-primary me-2" data-bs-toggle="modal" data-bs-target="#editClient"
-            (click)="editClient()">Editar</button>
+            (click)="editClient(client)">Editar</button>
           <button type="button" class="btn btn-outline-danger" (click)="deleteClient(client)">Deletar</button>
         </td>
       </tr>
@@ -35,7 +35,7 @@
   </table>
 
   <!-- ADD CLIENT -->
-  <div class="modal fade" id="addClient" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="addClient" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="false">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
