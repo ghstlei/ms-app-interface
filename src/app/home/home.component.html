@@ -1,8 +1,75 @@
-<div class="container-fluid page">
-  <div class="d-flex page__box p-3 mt-2">Home</div>
-  <div class="page__content shadow p-3 position-relative">
-    <div class="page__content-data position-absolute text-center">
-      Home Content Goes Here
+<div class="container-fluid">
+
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand">Home</a>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <p>Algumas regras e validações deverão ser aplicadas tanto ao backend, quanto ao frontend. São elas:</p>
+        <h6>
+            Dias de afastamento
+        </h6>
+        <p>
+            O campo "dias de afastamento" somente deverá ser habilitado quando o tipo de afastamento for "Licença
+            maternidade", "Licença paternidade" ou "Férias";
+            O campo "dias de afastamento" deverá ser salvo apenas quando o tipo de afastamento for "Licença
+            maternidade", "Licença paternidade" ou "Férias";
+        </p>
+        <h6>
+            Data de retorno
+        </h6>
+        <p>
+            O campo "data de retorno" somente deverá ser habilitado quando o tipo de afastamento for Licença
+            maternidade, licença paternidade e férias;
+            O campo "data de retorno" deverá ser salvo apenas quando o tipo de afastamento for Licença maternidade,
+            licença paternidade e férias;
+        </p>
+        <h6>
+            Licença maternidade
+        </h6>
+        <p>
+            Se o tipo for "licença maternidade", o campo "dias de afastamento" deve ser desabilitado e preenchido com
+            180 e a "data de retorno" deve ser desabilitado e ser calculada de acordo com a data inicial;
+            Se o tipo for "licença maternidade", o campo "dias de afastamento" deve ser preenchido com 180 e a "data de
+            retorno" deve ser calculada de acordo com a data inicial;
+        </p>
+        <h6>
+            Licença paternidade
+        </h6>
+        <p>
+            Se o tipo for "licença paternidade", o campo "dias de afastamento" deve ser desabilitado e preenchido com 20
+            e a "data de retorno" deve ser desabilitado e ser calculada de acordo com a data inicial;
+            Se o tipo for "licença paternidade", o campo "dias de afastamento" deve ser preenchido com 20 e a "data de
+            retorno" deve ser calculada de acordo com a data inicial;
+        </p>
+        <h6>
+            Demissão
+        </h6>
+        <p>
+
+            Se um empregado já tiver cadastrado um afastamento do tipo "demissão" não deverá permitir salvar um novo
+            afastamento e deve ser apresentada a mensagem “O funcionário "nome" possui um afastamento do tipo 'demissão'
+            e
+            não permite novos afastamentos”;
+        </p>
+        <h6>
+            Morte
+        </h6>
+        <p>
+            Se um empregado já tiver cadastrado um afastamento do tipo "morte" não deverá permitir salvar um novo
+            afastamento e deve ser apresentada a mensagem “O funcionário "nome" possui um afastamento do tipo 'morte' e
+            não
+            permite novos afastamentos”;
+        </p>
+        <h6>
+            Tipo
+        </h6>
+        <p>
+            O campo "Tipo" só deverá ser salvo quando o tipo de afastamento for "acidente de trabalho";
+            O campo "Tipo" deverá estar habilitado apenas quando o tipo de afastamento for "acidente de trabalho";
+
+        </p>
     </div>
-  </div>
 </div>

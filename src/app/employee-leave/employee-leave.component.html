@@ -3,71 +3,186 @@
   <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
       <a class="navbar-brand">Afastamento de Empregado</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
-        <button class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#addClient" type="submit">Adicionar</button>
+        <button class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#addLeave"
+          type="submit">Adicionar</button>
       </div>
     </div>
   </nav>
 
-<!-- Modal -->
-<div class="modal fade" id="addClient" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Novo afastamento de empregado</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        
-        <form>
-          <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">Empresa</label>
-            <input type="text" formControlName="client" class="form-control" id="client" aria-describedby="Empresa">
-          </div>
-          <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">Nome do Funcionário</label>
-            <input type="text" formControlName="name" class="form-control" id="name" aria-describedby="Nome">
-          </div>
-          <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">Motivo do afastamento</label>
-            <input type="text" formControlName="leave-type" class="form-control" id="leave-type" aria-describedby="CPF">
-          </div>
-          <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">Início do afastamento</label>
-            <input type="date" formControlName="leave-date" class="form-control" id="leave-date"
-              aria-describedby="Data de nascimento">
-          </div>
-          <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">Dias de afastamento</label>
-            <input type="number" formControlName="leave-days" class="form-control" id="leave-days"
-              aria-describedby="Cargo">
-          </div>
-          <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">Data de Retorno</label>
-            <input type="date" formControlName="return-date" class="form-control" id="return-date"
-              aria-describedby="Retorno">
-          </div>
-          <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">Tipo</label>
-            <input type="text" formControlName="type" class="form-control" id="type" aria-describedby="Tipo">
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-            <button type="button" class="btn btn-primary">Salvar</button>
-          </div>
-          
-        </form>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Empresa</th>
+        <th scope="col">Funcionário</th>
+        <th scope="col">Afastamento</th>
+        <th scope="col">Inicio</th>
+        <th scope="col">Dias</th>
+        <th scope="col">Retorno</th>
+        <th scope="col">Tipo</th>
+        <th scope="col">Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let leave of empList">
+        <td>{{leave.id}}</td>
+        <td>{{leave.client_id}}</td>
+        <td>{{leave.employee_id}}</td>
+        <td>{{leave.leave_type}}</td>
+        <td>{{leave.leave_date}}</td>
+        <td>{{leave.number_days}}</td>
+        <td>{{leave.return_date}}</td>
+        <td>{{leave.type}}</td>
+        <td>
+          <button type="button" class="btn btn-outline-primary me-2" data-bs-toggle="modal" data-bs-target="#editLeave"
+            (click)="editLeave(leave)">Editar</button>
+          <button type="button" class="btn btn-outline-danger" (click)="deleteLeaveById(leave)">Deletar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ADD LEAVE -->
+  <div class="modal fade" id="addLeave" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+    data-bs-backdrop="false">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Novo afastamento de empregado</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="empDetail">
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Empresa</label>
+              <select [(ngModel)]="client" class="form-select" id="client_id" name="client_id">
+                <option selected>Selecionar</option>
+                <option *ngFor="let client of client" [value]="client.id">{{client.name}}</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Nome do Funcionário</label>
+              <select [(ngModel)]="employee" class="form-select" id="employee_id" name="employee_id">
+                <option [ngValue]="null">Selecionar</option>
+                <option *ngFor="let employee of employee" [value]="employee.id">{{employee.name}}</option>
+              </select>
+            </div>
 
 
+            <div class="form-group">
+              <label for="exampleInputEmail1" class="form-label">Motivo do afastamento</label>
+              <select class="form-control" id="leaveType" name="leaveType" [(ngModel)]="leaveType" (change)="changeInputValue()">
+                <option [ngValue]="null">Select Leave Type</option>
+                <option *ngFor="let type of leaveTypes" [ngValue]="type.id">{{ type.name }}</option>
+              </select>
+            </div>
+
+
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Início do afastamento</label>
+              <input type="date" formControlName="leave_date" class="form-control" id="leave_date" name="leave_date"
+                aria-describedby="leave_date">
+            </div>
+
+
+            <div class="form-group">
+              <label for="leaveDays">Leave Days:</label>
+              <input class="form-control" type="number" id="leaveDays" name="leaveDays" [(ngModel)]="leaveDays" [disabled]="!isLeaveDaysEnabled">
+              </div>
+
+
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Data de Retorno</label>
+              <input type="date" formControlName="return_date" class="form-control" id="return_date" name="return_date"
+                aria-describedby="return_date">
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Tipo</label>
+              <select [(ngModel)]="type" class="form-select" id="type" name="type">
+                <option selected>Selecionar</option>
+                <option *ngFor="let type of type" [value]="type.id">{{type.name}}</option>
+              </select>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+              <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="addLeave()">Salvar</button>
+            </div>
+          </form>
+        </div>
       </div>
-      
+    </div>
+  </div>
+
+  <!-- EDIT CLIENT -->
+  <div class="modal fade" id="editLeave" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+    data-bs-backdrop="false">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Editar cliente</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="empDetail">
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">ID</label>
+              <input type="number" formControlName="id" class="form-control" id="id" aria-describedby="id">
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Empresa</label>
+              <select [(ngModel)]="client" class="form-select" id="client_id" name="client_id">
+                <option selected>Selecionar</option>
+                <option *ngFor="let client of client" [value]="client.id">{{client.name}}</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Nome do Funcionário</label>
+              <select [(ngModel)]="employee" class="form-select" id="employee_id" name="employee_id">
+                <option selected>Selecionar</option>
+                <option *ngFor="let employee of employee" [value]="employee.id">{{employee.name}}</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputEmail1" class="form-label">Motivo do afastamento</label>
+              <select [(ngModel)]="leaveType" class="form-select" id="leave_type" name="leave_type">
+                <option selected>Selecionar</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Início do afastamento</label>
+              <input type="date" formControlName="leave_date" class="form-control" id="leave_date" name="leave_date"
+                aria-describedby="leave_date">
+            </div>
+            <div class="form-group">
+              <label for="leaveDays">Leave Days:</label>
+              <input class="form-control" type="number" id="leaveDays" name="leaveDays" [(ngModel)]="leaveDays" [disabled]="!isLeaveDaysEnabled">
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Data de Retorno</label>
+              <input type="date" formControlName="return_date" class="form-control" id="return_date" name="return_date"
+                aria-describedby="return_date">
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Tipo</label>
+              <select [(ngModel)]="type" class="form-select" id="type" name="type">
+                <option selected>Selecionar</option>
+                <option *ngFor="let type of type" [value]="type.id">{{type.name}}</option>
+              </select>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+              <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                (click)="updateLeave()">Atualizar</button>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
   </div>
 </div>
-
-</div>
-
-
